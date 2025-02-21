@@ -6,7 +6,6 @@ import Loader from "./components/loader";
 
 function App() {
   const [cameraPosition] = useState([5, 20, 25]);
-  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
@@ -52,7 +51,6 @@ function App() {
             <li>💯 Full Screen: Press ESC Key</li>
           </ul>
         </div>
-        {isLoading}
         <Canvas
           camera={{
             position: cameraPosition,
@@ -62,7 +60,7 @@ function App() {
           }}
           shadows={true}
         >
-          <Scene onLoaded={() => setIsLoading(false)} />
+          <Scene />
         </Canvas>
       </Suspense>
     </div>

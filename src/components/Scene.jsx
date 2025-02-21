@@ -1,44 +1,28 @@
 import {
   Environment,
   OrbitControls,
-  Preload,
   Sky,
   useEnvironment,
-  useTexture,
 } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { Ocean } from "react-three-ocean";
 import {
+  Audio,
+  AudioListener,
+  AudioLoader,
   Color,
   FrontSide,
   Vector3,
-  AudioListener,
-  AudioLoader,
-  Audio,
 } from "three";
 import { Model } from "./platform";
 
 export function Scene({ onLoaded }) {
-  useEffect(() => {
-    // Once the model is loaded, trigger the callback
-    if (onLoaded) onLoaded();
-  }, [onLoaded]);
   const ocean = useRef();
   const { scene, camera } = useThree();
 
-  // Static sun position
-  const sunPosition = new Vector3(100, 50, 100);
-
   const envMap = useEnvironment({
     files: "/assets/clouds.hdr",
-  });
-
-  useFrame((state) => {
-    // Prevent the camera from going below the ocean surface
-    if (state.camera.position.y < 1) {
-      state.camera.position.y = 1;
-    }
   });
 
   useEffect(() => {
@@ -67,7 +51,7 @@ export function Scene({ onLoaded }) {
       <Environment map={envMap} background={false} />
       <Sky
         distance={450000}
-        sunPosition={sunPosition}
+        sunPosition={new Vector3(100, 50, 100)}
         inclination={0.5}
         azimuth={0.25}
         mieCoefficient={0.001}
@@ -80,7 +64,7 @@ export function Scene({ onLoaded }) {
       <ambientLight intensity={0.5} color="#ffffff" />
       <directionalLight
         intensity={2}
-        position={sunPosition}
+        position={new Vector3(100, 50, 100)}
         castShadow
         receiveShadow
         shadow-mapSize-width={2048}
@@ -103,7 +87,7 @@ export function Scene({ onLoaded }) {
 
       <Ocean
         ref={ocean}
-        dimensions={[2000, 2000]}
+        dimensions={[1000, 1000]}
         normals="/assets/waternormals.jpg"
         distortionScale={0.5}
         size={4}
@@ -112,7 +96,7 @@ export function Scene({ onLoaded }) {
           alpha: 1,
           waterColor: new Color("#1a8cff"),
           sunColor: new Color("#FDB813"),
-          sunDirection: sunPosition.clone().normalize(),
+          sunDirection: new Vector3(100, 50, 100).normalize(),
           eye: new Vector3(0, 0, 0),
           distortionScale: 100,
           side: FrontSide,
@@ -136,8 +120,6 @@ export function Scene({ onLoaded }) {
         autoRotate={false}
         autoRotateSpeed={1}
       />
-
-      <Preload all />
     </>
   );
 }
