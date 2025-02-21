@@ -19,7 +19,11 @@ import {
 } from "three";
 import { Model } from "./platform";
 
-export function Scene() {
+export function Scene({ onLoaded }) {
+  useEffect(() => {
+    // Once the model is loaded, trigger the callback
+    if (onLoaded) onLoaded();
+  }, [onLoaded]);
   const ocean = useRef();
   const { scene, camera } = useThree();
 
