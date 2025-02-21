@@ -103,7 +103,7 @@ export function Scene({ onLoaded }) {
 
       <Ocean
         ref={ocean}
-        dimensions={[4000, 4000]}
+        dimensions={[2000, 2000]}
         normals="/assets/waternormals.jpg"
         distortionScale={0.5}
         size={4}
