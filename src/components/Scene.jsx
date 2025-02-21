@@ -53,7 +53,7 @@ export function Scene({ onLoaded }) {
     audioLoader.load("/assets/waves.mp3", (buffer) => {
       audio.setBuffer(buffer);
       audio.setLoop(true);
-      audio.setVolume(0.2);
+      audio.setVolume(0.3);
       audio.play();
     });
 
