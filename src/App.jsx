@@ -48,10 +48,10 @@ function App() {
           <li>🔄 Rotate: Left Click + Drag</li>
           <li>🔍 Zoom: Scroll Wheel</li>
           <li>🔄 Pan: Right Click + Drag</li>
-          <li>⛶ Reset: Double Click</li>
+          <li>💯 Full Screen: Press ESC Key</li>
         </ul>
       </div>
-
+      {isLoading}
       <Canvas
         camera={{
           position: cameraPosition,
