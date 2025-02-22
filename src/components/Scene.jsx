@@ -15,9 +15,9 @@ import {
   FrontSide,
   Vector3,
 } from "three";
-import { Model } from "./platform";
+import { PlatformModel } from "./PlatformModel";
 
-export function Scene({ onLoaded }) {
+export function Scene() {
   const ocean = useRef();
   const { scene, camera } = useThree();
 
@@ -60,7 +60,6 @@ export function Scene({ onLoaded }) {
         turbidity={10}
       />
 
-      {/* Lighting */}
       <ambientLight intensity={0.5} color="#ffffff" />
       <directionalLight
         intensity={2}
@@ -78,7 +77,7 @@ export function Scene({ onLoaded }) {
         shadow-bias={-0.001}
       />
 
-      <Model
+      <PlatformModel
         position={[0, 2, 0]}
         rotation={[0, 10, 0]}
         castShadow
@@ -87,7 +86,7 @@ export function Scene({ onLoaded }) {
 
       <Ocean
         ref={ocean}
-        dimensions={[4000, 4000]}
+        dimensions={[5000, 5000]}
         normals="/assets/waternormals.jpg"
         distortionScale={0.5}
         size={4}
@@ -109,7 +108,6 @@ export function Scene({ onLoaded }) {
           return null;
         }}
       </Ocean>
-
       <OrbitControls
         maxPolarAngle={Math.PI / 2 - 0.3}
         minDistance={5}

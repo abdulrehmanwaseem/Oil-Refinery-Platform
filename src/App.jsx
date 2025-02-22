@@ -2,55 +2,31 @@ import { Canvas } from "@react-three/fiber";
 import { Scene } from "./components/Scene";
 import { useState, Suspense } from "react";
 import { Leva } from "leva";
-import Loader from "./components/loader";
+import Loader from "./components/Loader";
 
 function App() {
   const [cameraPosition] = useState([5, 20, 25]);
 
   return (
-    <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
-      <Suspense fallback={<Loader />}>
-        <Leva />
-        <div
-          style={{
-            position: "absolute",
-            top: "20px",
-            left: "20px",
-            padding: "10px 20px",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            color: "#ffffff",
-            fontSize: "24px",
-            borderRadius: "8px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
-            zIndex: 10,
-          }}
-        >
-          3D DOC Visualizer
-        </div>
+    <div className="w-screen h-screen relative">
+      <Leva />
+      <div className="absolute top-5 left-5 px-5 py-2.5 bg-black/50 text-white text-2xl rounded-lg shadow-md z-10 select-none">
+        3D DOC Visualizer
+      </div>
 
-        <div
-          style={{
-            position: "absolute",
-            bottom: "20px",
-            right: "20px",
-            padding: "10px 15px",
-            backgroundColor: "rgba(0, 0, 0, 0.7)",
-            color: "#ffffff",
-            fontSize: "14px",
-            borderRadius: "8px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
-            zIndex: 10,
-            lineHeight: "1.5",
-          }}
-        >
-          <strong>Orbit Controls:</strong>
-          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            <li>🔄 Rotate: Left Click + Drag</li>
-            <li>🔍 Zoom: Scroll Wheel</li>
-            <li>🔄 Pan: Right Click + Drag</li>
-            <li>💯 Full Screen: Press ESC Key</li>
-          </ul>
-        </div>
+      <Loader />
+
+      <div className="absolute bottom-5 right-5 px-4 py-2.5 bg-black/70 text-white text-sm rounded-lg shadow-md z-10 leading-relaxed select-none">
+        <strong>Orbit Controls:</strong>
+        <ul className="list-none p-0 m-0 space-y-1">
+          <li>🔄 Rotate: Left Click + Drag</li>
+          <li>🔍 Zoom: Scroll Wheel</li>
+          <li>🔄 Pan: Right Click + Drag</li>
+          <li>💯 Full Screen: Press ESC Key</li>
+        </ul>
+      </div>
+
+      <Suspense fallback={<Loader />}>
         <Canvas
           camera={{
             position: cameraPosition,
@@ -58,7 +34,7 @@ function App() {
             near: 0.1,
             far: 1000,
           }}
-          shadows={true}
+          shadows
         >
           <Scene />
         </Canvas>
