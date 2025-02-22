@@ -1,14 +1,26 @@
 import { useGLTF, useTexture } from "@react-three/drei";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export function PlatformModel(props) {
+export function PlatformModel({ toggleTexture, ...props }) {
   const { nodes } = useGLTF("/assets/platform.glb");
-  const texture = useTexture("/assets/texture5.jpg");
 
-  texture.center.set(0.5, 0.5);
-  texture.rotation = Math.PI;
+  // Load both textures
+  const texture2 = useTexture("/assets/texture2.jpg");
+  const texture1 = useTexture("/assets/texture1.jpg");
+
+  // Rotate both textures
+  texture2.center.set(0.5, 0.5);
+  texture2.rotation = Math.PI;
+  texture1.center.set(0.5, 0.5);
+  texture1.rotation = Math.PI;
 
   const [hovered, setHovered] = useState(null);
+  const [activeTexture, setActiveTexture] = useState(texture1); // Default to texture11
+
+  // Switch texture based on prop
+  useEffect(() => {
+    setActiveTexture(toggleTexture ? texture2 : texture1);
+  }, [toggleTexture]);
 
   const handlePointerOver = (e) => {
     e.stopPropagation();
@@ -39,8 +51,8 @@ export function PlatformModel(props) {
             receiveShadow
           >
             <meshStandardMaterial
-              map={texture}
-              metalness={0.2}
+              map={activeTexture}
+              metalness={0.4}
               roughness={0.7}
               transparent
               opacity={hovered === key ? 0.65 : 1}
