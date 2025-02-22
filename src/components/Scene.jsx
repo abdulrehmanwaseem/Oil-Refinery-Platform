@@ -29,11 +29,9 @@ const Scene = () => {
   useEffect(() => {
     scene.background = envMap;
 
-    // Create an AudioListener and add it to the camera.
     const listener = new AudioListener();
     camera.add(listener);
 
-    // Resume the AudioContext on first user interaction.
     const resumeAudioContext = () => {
       if (listener.context.state === "suspended") {
         listener.context.resume().then(() => {
@@ -48,7 +46,6 @@ const Scene = () => {
       passive: true,
     });
 
-    // Load the audio and attach it to the ocean object.
     const audio = new Audio(listener);
     const audioLoader = new AudioLoader();
     audioLoader.load("/assets/waves.mp3", (buffer) => {
@@ -56,7 +53,6 @@ const Scene = () => {
       audio.setLoop(true);
       audio.setVolume(0.2);
 
-      // Attach the audio to the ocean so its position is tied to the water.
       if (ocean.current) {
         ocean.current.add(audio);
       }

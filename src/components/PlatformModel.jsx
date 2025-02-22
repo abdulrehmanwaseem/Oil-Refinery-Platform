@@ -1,26 +1,55 @@
 import { useGLTF, useTexture } from "@react-three/drei";
-import React from "react";
-import { MeshStandardMaterial } from "three";
+import React, { useState } from "react";
 
 export function PlatformModel(props) {
-  const { scene } = useGLTF("/assets/ibda_platform_v1.glb");
-
+  const { nodes } = useGLTF("/assets/platform.glb");
   const texture = useTexture("/assets/texture5.jpg");
 
-  scene.traverse((child) => {
-    if (child.isMesh) {
-      child.material = new MeshStandardMaterial({
-        map: texture,
-        metalness: 1,
-        roughness: 0.7,
-        opacity: 0.8,
-      });
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+  texture.center.set(0.5, 0.5);
+  texture.rotation = Math.PI;
 
-  return <primitive object={scene} {...props} />;
+  const [hovered, setHovered] = useState(null);
+
+  const handlePointerOver = (e) => {
+    e.stopPropagation();
+    setHovered(e.object.name);
+    document.body.style.cursor = "pointer";
+  };
+
+  const handlePointerOut = (e) => {
+    e.stopPropagation();
+    setHovered(null);
+    document.body.style.cursor = "auto";
+  };
+
+  const meshKeys = Object.keys(nodes).filter((key) => nodes[key].isMesh);
+
+  return (
+    <group {...props} dispose={null}>
+      {meshKeys.map((key) => {
+        const node = nodes[key];
+        return (
+          <mesh
+            key={key}
+            geometry={node.geometry}
+            name={key}
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
+            castShadow
+            receiveShadow
+          >
+            <meshStandardMaterial
+              map={texture}
+              metalness={0.2}
+              roughness={0.7}
+              transparent
+              opacity={hovered === key ? 0.65 : 1}
+            />
+          </mesh>
+        );
+      })}
+    </group>
+  );
 }
 
-useGLTF.preload("/assets/ibda_platform_v1.glb");
+useGLTF.preload("/assets/platform.glb");

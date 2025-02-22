@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from "react";
+import { animated, useSpring } from "@react-spring/web";
 import { useProgress } from "@react-three/drei";
-import { useSpring, animated } from "@react-spring/web";
+import React, { useEffect, useState } from "react";
 
 const Loader = () => {
   const { progress, loaded, total } = useProgress();
-  // Calculate combined progress explicitly (this should equal progress)
   const combinedProgress = (loaded / total) * 100;
   const [maxProgress, setMaxProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
-  // Update maxProgress so that it never decreases
   useEffect(() => {
     setMaxProgress((prev) => Math.max(prev, combinedProgress));
   }, [combinedProgress]);
 
-  // Create a smooth animation using react-spring, animating to maxProgress
   const animatedProgress = useSpring({
     from: { width: 0 },
     to: { width: maxProgress },
     config: { tension: 220, friction: 30 },
   });
 
-  // Once the progress reaches 100, hide the loader after a brief delay
   useEffect(() => {
     if (maxProgress === 100) {
       const timeout = setTimeout(() => {
