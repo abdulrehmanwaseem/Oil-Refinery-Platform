@@ -3,6 +3,7 @@ import { Leva } from "leva";
 import { Suspense, useState } from "react";
 import Loader from "./components/Loader";
 import Scene from "./components/Scene";
+import { Preload } from "@react-three/drei";
 
 function App() {
   const [cameraPosition] = useState([5, 20, 25]);

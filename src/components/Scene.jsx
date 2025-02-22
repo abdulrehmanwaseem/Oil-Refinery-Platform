@@ -1,6 +1,7 @@
 import {
   Environment,
   OrbitControls,
+  Preload,
   Sky,
   useEnvironment,
 } from "@react-three/drei";
@@ -118,6 +119,7 @@ const Scene = () => {
         autoRotate={false}
         autoRotateSpeed={1}
       />
+      <Preload all />
     </>
   );
 };
