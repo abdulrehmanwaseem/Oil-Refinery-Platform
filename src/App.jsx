@@ -1,8 +1,8 @@
 import { Canvas } from "@react-three/fiber";
-import { Scene } from "./components/Scene";
-import { useState, Suspense } from "react";
 import { Leva } from "leva";
+import { Suspense, useState } from "react";
 import Loader from "./components/Loader";
+import Scene from "./components/Scene";
 
 function App() {
   const [cameraPosition] = useState([5, 20, 25]);

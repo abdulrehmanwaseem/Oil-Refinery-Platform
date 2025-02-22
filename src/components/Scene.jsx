@@ -17,7 +17,7 @@ import {
 } from "three";
 import { PlatformModel } from "./PlatformModel";
 
-export function Scene() {
+const Scene = () => {
   const ocean = useRef();
   const { scene, camera } = useThree();
 
@@ -120,4 +120,6 @@ export function Scene() {
       />
     </>
   );
-}
+};
+
+export default Scene;

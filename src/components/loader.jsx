@@ -5,7 +5,6 @@ import { useSpring, animated } from "@react-spring/web";
 const Loader = () => {
   const { progress } = useProgress();
   const [isVisible, setIsVisible] = useState(true);
-  console.log(progress);
 
   const animatedProgress = useSpring({
     from: { width: 0 },
