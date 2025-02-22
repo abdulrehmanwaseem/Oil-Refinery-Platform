@@ -29,21 +29,44 @@ const Scene = () => {
   useEffect(() => {
     scene.background = envMap;
 
-    // Add humming sound
+    // Create an AudioListener and add it to the camera.
     const listener = new AudioListener();
     camera.add(listener);
 
+    // Resume the AudioContext on first user interaction.
+    const resumeAudioContext = () => {
+      if (listener.context.state === "suspended") {
+        listener.context.resume().then(() => {
+          console.log("Audio context resumed");
+        });
+      }
+      window.removeEventListener("click", resumeAudioContext);
+      window.removeEventListener("touchstart", resumeAudioContext);
+    };
+    window.addEventListener("click", resumeAudioContext, { passive: true });
+    window.addEventListener("touchstart", resumeAudioContext, {
+      passive: true,
+    });
+
+    // Load the audio and attach it to the ocean object.
     const audio = new Audio(listener);
     const audioLoader = new AudioLoader();
     audioLoader.load("/assets/waves.mp3", (buffer) => {
       audio.setBuffer(buffer);
       audio.setLoop(true);
-      audio.setVolume(0.3);
+      audio.setVolume(0.2);
+
+      // Attach the audio to the ocean so its position is tied to the water.
+      if (ocean.current) {
+        ocean.current.add(audio);
+      }
       audio.play();
     });
 
     return () => {
       camera.remove(listener);
+      window.removeEventListener("click", resumeAudioContext);
+      window.removeEventListener("touchstart", resumeAudioContext);
     };
   }, [scene, envMap, camera]);
 
@@ -61,6 +84,7 @@ const Scene = () => {
         turbidity={10}
       />
 
+      {/* Lighting */}
       <ambientLight intensity={0.5} color="#ffffff" />
       <directionalLight
         intensity={2}
@@ -78,6 +102,7 @@ const Scene = () => {
         shadow-bias={-0.001}
       />
 
+      {/* Scene Objects */}
       <PlatformModel
         position={[0, 2, 0]}
         rotation={[0, 10, 0]}
@@ -109,6 +134,7 @@ const Scene = () => {
           return null;
         }}
       </Ocean>
+
       <OrbitControls
         maxPolarAngle={Math.PI / 2 - 0.3}
         minDistance={5}
@@ -119,6 +145,7 @@ const Scene = () => {
         autoRotate={false}
         autoRotateSpeed={1}
       />
+
       <Preload all />
     </>
   );
