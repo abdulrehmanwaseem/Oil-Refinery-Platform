@@ -18,7 +18,7 @@ import {
 } from "three";
 import { PlatformModel } from "./PlatformModel";
 
-const Scene = ({ toggleTexture }) => {
+const Scene = ({ selectedAsset }) => {
   const ocean = useRef();
   const { scene, camera } = useThree();
 
@@ -100,11 +100,11 @@ const Scene = ({ toggleTexture }) => {
 
       {/* Scene Objects */}
       <PlatformModel
-        position={[0, 2, 0]}
+        position={[0, 2.4, 0]}
         rotation={[0, 10, 0]}
         castShadow
         receiveShadow
-        toggleTexture={toggleTexture}
+        selectedAsset={selectedAsset}
       />
 
       <Ocean

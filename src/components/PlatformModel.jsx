@@ -1,26 +1,13 @@
 import { useGLTF, useTexture } from "@react-three/drei";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-export function PlatformModel({ toggleTexture, ...props }) {
+export function PlatformModel({ selectedAsset, ...props }) {
   const { nodes } = useGLTF("/assets/platform.glb");
-
-  // Load both textures
-  const texture2 = useTexture("/assets/texture2.jpg");
-  const texture1 = useTexture("/assets/texture1.jpg");
-
-  // Rotate both textures
-  texture2.center.set(0.5, 0.5);
-  texture2.rotation = Math.PI;
-  texture1.center.set(0.5, 0.5);
-  texture1.rotation = Math.PI;
+  const texture = useTexture("/assets/texture2.jpg");
+  texture.center.set(0.5, 0.5);
+  texture.rotation = Math.PI;
 
   const [hovered, setHovered] = useState(null);
-  const [activeTexture, setActiveTexture] = useState(texture1); // Default to texture11
-
-  // Switch texture based on prop
-  useEffect(() => {
-    setActiveTexture(toggleTexture ? texture2 : texture1);
-  }, [toggleTexture]);
 
   const handlePointerOver = (e) => {
     e.stopPropagation();
@@ -33,6 +20,7 @@ export function PlatformModel({ toggleTexture, ...props }) {
     setHovered(null);
     document.body.style.cursor = "auto";
   };
+  console.log(selectedAsset);
 
   const meshKeys = Object.keys(nodes).filter((key) => nodes[key].isMesh);
 
@@ -40,6 +28,7 @@ export function PlatformModel({ toggleTexture, ...props }) {
     <group {...props} dispose={null}>
       {meshKeys.map((key) => {
         const node = nodes[key];
+        console.log(key);
         return (
           <mesh
             key={key}
@@ -51,11 +40,13 @@ export function PlatformModel({ toggleTexture, ...props }) {
             receiveShadow
           >
             <meshStandardMaterial
-              map={activeTexture}
-              metalness={0.4}
+              map={texture}
+              metalness={0.2}
               roughness={0.7}
               transparent
-              opacity={hovered === key ? 0.65 : 1}
+              opacity={hovered === key ? 0.75 : 1}
+              emissive={selectedAsset === key ? "red" : "black"}
+              emissiveIntensity={selectedAsset === key ? 0.8 : 0}
             />
           </mesh>
         );
