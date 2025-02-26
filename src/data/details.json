@@ -1,0 +1,13 @@
+[
+  { "label": "Area", "value": "Process Area 2" },
+  { "label": "Type", "value": "Pumping System" },
+  { "label": "Manufacturer", "value": "Flowserve" },
+  { "label": "Model No.", "value": "CP-750" },
+  { "label": "Serial No.", "value": "CP556677" },
+  { "label": "Installation Date", "value": "2021-05-15" },
+  { "label": "Maintenance Frequency", "value": "Monthly" },
+  { "label": "Status", "value": "Operational" },
+  { "label": "Last Maintenance Date", "value": "2024-01-05" },
+  { "label": "Criticality", "value": "High" },
+  { "label": "Data Source", "value": "IoT Sensor" }
+]

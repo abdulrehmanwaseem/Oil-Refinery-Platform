@@ -3,7 +3,6 @@ import { Suspense, useState } from "react";
 import Loader from "./components/Loader";
 import Scene from "./components/Scene";
 import UI from "./components/ui";
-import data from "./data";
 
 function App() {
   const [cameraPosition] = useState([5, 20, 25]);

@@ -1,14 +1,8 @@
 import { faCircleQuestion, faCopy } from "@fortawesome/free-regular-svg-icons";
-import {
-  faArrowRotateRight,
-  faChevronDown,
-  faCirclePlus,
-  faRotate,
-  faSearch,
-  faThLarge,
-} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useRef, useState } from "react";
+import assets from "../../data/assets.json";
+import details from "../../data/details.json";
 import "../../utils/fontawesome";
 
 function Header() {
@@ -16,7 +10,7 @@ function Header() {
   const [isAreaOpen, setIsAreaOpen] = useState(false);
   return (
     <header className="absolute z-10 flex flex-wrap items-center justify-between top-3 inset-x-4">
-      <div className="flex items-center justify-between px-4 py-1.5  rounded-lg w-96 bg-white/95 hover:bg-gray-100">
+      <div className="flex shadow-md items-center justify-between px-4 py-1.5 rounded-lg w-96 bg-white/95 hover:bg-gray-100">
         <div className="flex items-center -mr-2">
           <img src="/logo.png" className="cursor-pointer" />
           <div className="w-px h-6 ml-4 bg-gray-300" />
@@ -45,7 +39,7 @@ function Header() {
 
       <button
         type="button"
-        class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        class="text-white bg-blue-600 shadow-md flex items-center hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
       >
         <FontAwesomeIcon icon={faCopy} className="mr-2 size-4" />
         Overview
@@ -53,29 +47,29 @@ function Header() {
 
       <button
         type="button"
-        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-4 py-2"
+        class="text-gray-900 shadow-md bg-white border flex items-center border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-4 py-2"
       >
-        <FontAwesomeIcon icon={faRotate} className="mr-2 size-4" />
+        <FontAwesomeIcon icon={"rotate"} className="mr-2 size-4" />
         Process Area
       </button>
 
       <button
         type="button"
-        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-4 py-2"
+        class="text-gray-900 shadow-md bg-white border flex items-center border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-4 py-2"
       >
-        <FontAwesomeIcon icon={faThLarge} className="mr-2" />
+        <FontAwesomeIcon icon={"th-large"} className="mr-2 size-4" />
         System
       </button>
 
-      <div className="relative">
+      <div className="relative shadow-md">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="bg-white rounded-md px-4 py-1.5  flex items-center gap-6 text-sm hover:bg-gray-100"
+          className="bg-white rounded-md px-4 py-1.5 flex items-center gap-6 text-sm hover:bg-gray-100"
         >
           <span className="text-xs font-bold">SITE</span>
           <span className="">ISDAR PLATFORM</span>
           <FontAwesomeIcon
-            icon={faChevronDown}
+            icon={"chevron-down"}
             className="h-6 text-neutral-600 size-4"
           />{" "}
         </button>
@@ -92,7 +86,7 @@ function Header() {
       </div>
 
       {/* Area Selector */}
-      <div className="relative">
+      <div className="relative shadow-md">
         <button
           onClick={() => setIsAreaOpen(!isAreaOpen)}
           className="bg-white rounded-md px-4 py-1.5  flex items-center gap-6 text-sm hover:bg-gray-100"
@@ -100,12 +94,12 @@ function Header() {
           <span className="text-xs font-bold">AREA</span>
           <span>ALL</span>
           <FontAwesomeIcon
-            icon={faChevronDown}
+            icon={"chevron-down"}
             className="h-6 text-neutral-600 size-4"
           />
         </button>
         {isAreaOpen && (
-          <div className="absolute left-0 w-48 py-1 mt-1 bg-white rounded-md shadow-lg top-full">
+          <div className="absolute left-0 z-50 w-48 py-1 mt-1 bg-white rounded-md shadow-lg top-full">
             <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-100">
               Area 1
             </a>
@@ -117,18 +111,18 @@ function Header() {
       </div>
 
       {/* Navigation Icons */}
-      <div className="flex items-center justify-between gap-10 px-4 py-1 text-sm rounded-lg bg-white/95 hover:bg-gray-100">
+      <div className="flex items-center justify-between gap-10 px-4 py-1 text-sm rounded-lg shadow-md bg-white/95 hover:bg-gray-100">
         <div className="flex items-center gap-4">
           <FontAwesomeIcon
             icon={faCircleQuestion}
             className="cursor-pointer text-neutral-600 size-4"
           />
           <FontAwesomeIcon
-            icon={faCirclePlus}
+            icon={"circle-plus"}
             className="cursor-pointer text-neutral-600 size-4"
           />
           <FontAwesomeIcon
-            icon={faSearch}
+            icon={"search"}
             className="cursor-pointer text-neutral-600 size-4"
           />
         </div>
@@ -151,61 +145,6 @@ function Header() {
 function LeftSidebar({ selectedAsset, setSelectedAsset }) {
   const containerRef = useRef(null);
 
-  const assets = [
-    {
-      status: "red",
-      name: "63PST6482 - Pressure Safety Transmitter (PSD)",
-      score: 14,
-    },
-    { status: "red", name: "CP-009 Centrifugal Pump", score: 16 },
-    { status: "yellow", name: "76SA003 - Free-fall lifeboat", score: 14 },
-    {
-      status: "yellow",
-      name: "Cube001",
-      score: 14,
-    },
-    {
-      status: "yellow",
-      name: "Cube002",
-      score: 8,
-    },
-    {
-      status: "yellow",
-      name: "Cube",
-      score: 2,
-    },
-    {
-      status: "yellow",
-      name: "54PA004A-M01 - NON-hazardous open drain pump motor",
-      score: 3,
-    },
-    {
-      status: "yellow",
-      name: "70GPG20A-BL01 - IR Point Gas Detector",
-      score: 5,
-    },
-    {
-      status: "yellow",
-      name: "70GPG20A-BN01 - IR Point Gas Detector",
-      score: 3,
-    },
-    {
-      status: "yellow",
-      name: "86RJP2003 - VHF (FM) Marine Fixed Radio",
-      score: 4,
-    },
-    {
-      status: "yellow",
-      name: "70JC005 - F&G Node F73 (CPU+I/O) Cabinet",
-      score: 4,
-    },
-    {
-      status: "yellow",
-      name: "70MDL15A-DU01 - Magnetic Door Release Unit",
-      score: 3,
-    },
-  ];
-
   const getStatusColor = (status) => {
     switch (status) {
       case "red":
@@ -217,7 +156,6 @@ function LeftSidebar({ selectedAsset, setSelectedAsset }) {
     }
   };
 
-  // Drag Scroll Logic (same as before)
   const onMouseDown = (e) => {
     const container = containerRef.current;
     container.style.cursor = "grabbing";
@@ -228,7 +166,7 @@ function LeftSidebar({ selectedAsset, setSelectedAsset }) {
 
     const onMouseMove = (e) => {
       const y = e.pageY - container.offsetTop;
-      const walk = y - startY; // Scroll speed multiplier if needed
+      const walk = y - startY;
       container.scrollTop = scrollTop - walk;
     };
 
@@ -249,7 +187,7 @@ function LeftSidebar({ selectedAsset, setSelectedAsset }) {
       <div className="flex items-center justify-between pb-4 border-b border-gray-200">
         <h2 className="text-lg font-semibold">Assets</h2>
         <button className="flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-800">
-          <FontAwesomeIcon icon={faArrowRotateRight} className="size-3.5" />{" "}
+          <FontAwesomeIcon icon={"arrow-rotate-right"} className="size-3.5" />{" "}
           <span>Refresh</span>
         </button>
       </div>
@@ -262,7 +200,7 @@ function LeftSidebar({ selectedAsset, setSelectedAsset }) {
           className="w-full px-4 py-2 text-sm bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <FontAwesomeIcon
-          icon={faChevronDown}
+          icon={"chevron-down"}
           className="absolute h-6 text-neutral-600 size-4 right-3 top-2"
         />
       </div>
@@ -309,7 +247,6 @@ function RightSidebar() {
   const [activeTab, setActiveTab] = useState("details");
   const contentRef = useRef(null);
 
-  // Drag Scroll Logic
   const onMouseDown = (e) => {
     const container = contentRef.current;
     container.style.cursor = "grabbing";
@@ -320,7 +257,7 @@ function RightSidebar() {
 
     const onMouseMove = (e) => {
       const y = e.pageY - container.getBoundingClientRect().top;
-      const walk = y - startY; // Adjust scroll speed multiplier if needed
+      const walk = y - startY;
       container.scrollTop = scrollTop - walk;
     };
 
@@ -337,22 +274,8 @@ function RightSidebar() {
 
   const tabs = ["details", "docs", "orders", "permits"];
 
-  const details = [
-    { label: "Area", value: "Process Area 2" },
-    { label: "Type", value: "Pumping System" },
-    { label: "Manufacturer", value: "Flowserve" },
-    { label: "Model No.", value: "CP-750" },
-    { label: "Serial No.", value: "CP556677" },
-    { label: "Installation Date", value: "2021-05-15" },
-    { label: "Maintenance Frequency", value: "Monthly" },
-    { label: "Status", value: "Operational" },
-    { label: "Last Maintenance Date", value: "2024-01-05" },
-    { label: "Criticality", value: "High" },
-    { label: "Data Source", value: "IoT Sensor" },
-  ];
-
   return (
-    <aside className="absolute z-20 flex flex-col p-4 overflow-hidden bg-white rounded-lg shadow-md top-20 bottom-10 right-4 w-80">
+    <aside className="absolute z-10 flex flex-col p-4 overflow-hidden bg-white rounded-lg shadow-md top-20 bottom-10 right-4 w-80">
       {/* Header */}
       <div className="flex items-center justify-between flex-shrink-0 mb-2">
         <div>
@@ -360,7 +283,7 @@ function RightSidebar() {
           <p className="text-sm text-gray-500">Centrifugal Pump</p>
         </div>
         <button className="flex-shrink-0 px-2 py-1 text-sm font-medium text-gray-600 bg-gray-100 rounded hover:bg-gray-200">
-          <FontAwesomeIcon icon={faArrowRotateRight} className="size-3.5" />{" "}
+          <FontAwesomeIcon icon={"arrow-rotate-right"} className="size-3.5" />{" "}
           <span>Refresh</span>
         </button>
       </div>

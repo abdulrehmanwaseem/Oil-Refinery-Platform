@@ -1,0 +1,54 @@
+[
+  {
+    "status": "red",
+    "name": "63PST6482 - Pressure Safety Transmitter (PSD)",
+    "score": 14
+  },
+  { "status": "red", "name": "CP-009 Centrifugal Pump", "score": 16 },
+  {
+    "status": "yellow",
+    "name": "Cube001",
+    "score": 14
+  },
+  {
+    "status": "yellow",
+    "name": "Cube002",
+    "score": 8
+  },
+  {
+    "status": "red",
+    "name": "Cube",
+    "score": 2
+  },
+  { "status": "yellow", "name": "76SA003 - Free-fall lifeboat", "score": 14 },
+  {
+    "status": "yellow",
+    "name": "54PA004A-M01 - NON-hazardous open drain pump motor",
+    "score": 3
+  },
+  {
+    "status": "yellow",
+    "name": "70GPG20A-BL01 - IR Point Gas Detector",
+    "score": 5
+  },
+  {
+    "status": "yellow",
+    "name": "70GPG20A-BN01 - IR Point Gas Detector",
+    "score": 3
+  },
+  {
+    "status": "yellow",
+    "name": "86RJP2003 - VHF (FM) Marine Fixed Radio",
+    "score": 4
+  },
+  {
+    "status": "yellow",
+    "name": "70JC005 - F&G Node F73 (CPU+I/O) Cabinet",
+    "score": 4
+  },
+  {
+    "status": "yellow",
+    "name": "70MDL15A-DU01 - Magnetic Door Release Unit",
+    "score": 3
+  }
+]
