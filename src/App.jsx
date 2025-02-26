@@ -13,13 +13,12 @@ function App() {
     <div className="relative w-screen h-screen">
       <Loader />
       <UI selectedAsset={selectedAsset} setSelectedAsset={setSelectedAsset} />
-
       <Suspense fallback={<Loader />}>
         <Canvas
           camera={{
             position: cameraPosition,
             fov: 50,
-            near: 0.1,
+            near: 0.2,
             far: 1000,
           }}
           shadows
