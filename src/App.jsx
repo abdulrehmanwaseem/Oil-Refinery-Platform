@@ -6,7 +6,7 @@ import UI from "./components/ui";
 
 function App() {
   const [cameraPosition] = useState([5, 20, 25]);
-  const [selectedAsset, setSelectedAsset] = useState("Cube001");
+  const [selectedAsset, setSelectedAsset] = useState("Main_Deck");
 
   return (
     <div className="relative w-screen h-screen">

@@ -51,7 +51,7 @@ const Scene = ({ selectedAsset }) => {
     audioLoader.load("/assets/waves.mp3", (buffer) => {
       audio.setBuffer(buffer);
       audio.setLoop(true);
-      audio.setVolume(0.2);
+      audio.setVolume(0.35);
 
       if (ocean.current) {
         ocean.current.add(audio);
@@ -100,8 +100,8 @@ const Scene = ({ selectedAsset }) => {
 
       {/* Scene Objects */}
       <PlatformModel
-        position={[1, 2.4, 6]}
-        rotation={[0, 10, 0]}
+        position={[2, 2.4, 7]}
+        rotation={[1.55, 0, 3]}
         castShadow
         receiveShadow
         selectedAsset={selectedAsset}

@@ -1,9 +1,10 @@
 import { faCircleQuestion, faCopy } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useMemo } from "react";
 import assets from "../../data/assets.json";
-import details from "../../data/details.json";
+import assetsDetails from "../../data/details.json";
 import "../../utils/fontawesome";
+import { faArrowRotateRight } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -99,7 +100,7 @@ function Header() {
             className="h-6 text-neutral-600 size-4"
           />
         </button>
-        {!isAreaOpen && (
+        {isAreaOpen && (
           <div className="absolute left-0 z-20 w-24 py-1 mt-1 bg-white rounded-md shadow-lg">
             <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-100">
               Area 1
@@ -221,12 +222,12 @@ function LeftSidebar({ selectedAsset, setSelectedAsset }) {
         className="space-y-2 overflow-hidden cursor-grab no-scrollbar"
         style={{ maxHeight: "calc(100% - 150px)" }}
       >
-        {assets.map((asset, index) => (
+        {assets?.map((asset, index) => (
           <li
             key={index}
-            onClick={() => setSelectedAsset(asset.name)}
+            onClick={() => setSelectedAsset(asset.name.replace(/ /g, "_"))}
             className={`flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 cursor-pointer ${
-              selectedAsset === asset.name
+              selectedAsset === asset.name.replace(/ /g, "_")
                 ? "bg-blue-50 border-l-4 border-blue-600"
                 : ""
             }`}
@@ -236,7 +237,7 @@ function LeftSidebar({ selectedAsset, setSelectedAsset }) {
                 asset.status
               )}`}
             ></span>
-            <span className="flex-1 ml-2 text-sm">{asset.name}</span>
+            <span className="flex-1 ml-16 text-md">{asset.name}</span>
             <span className="text-sm font-semibold">{asset.score}</span>
           </li>
         ))}
@@ -244,10 +245,28 @@ function LeftSidebar({ selectedAsset, setSelectedAsset }) {
     </aside>
   );
 }
-function RightSidebar() {
+function RightSidebar({ selectedAsset }) {
   const [activeTab, setActiveTab] = useState("details");
   const contentRef = useRef(null);
 
+  const details = useMemo(() => {
+    return assetsDetails[selectedAsset] || assetsDetails["Main_Deck"];
+  }, [selectedAsset]);
+
+  const headerDetails = useMemo(() => {
+    if (!details || details.length === 0)
+      return { type: "Unknown", model: "Unknown" };
+
+    const typeDetail = details.find((item) => item.label === "Asset Name");
+    const modelDetail = details.find((item) => item.label === "Asset ID");
+
+    return {
+      type: typeDetail ? typeDetail.value : "Unknown",
+      model: modelDetail ? modelDetail.value : "Unknown",
+    };
+  }, [details]);
+
+  // Drag Scroll
   const onMouseDown = (e) => {
     const container = contentRef.current;
     container.style.cursor = "grabbing";
@@ -280,11 +299,12 @@ function RightSidebar() {
       {/* Header */}
       <div className="flex items-center justify-between flex-shrink-0 mb-2">
         <div>
-          <h2 className="text-lg font-semibold">CP-009</h2>
-          <p className="text-sm text-gray-500">Centrifugal Pump</p>
+          <h2 className="text-lg font-semibold">{headerDetails.model}</h2>
+          <p className="text-sm text-gray-500">{headerDetails.type}</p>
         </div>
+
         <button className="flex-shrink-0 px-2 py-1 text-sm font-medium text-gray-600 bg-gray-100 rounded hover:bg-gray-200">
-          <FontAwesomeIcon icon={"arrow-rotate-right"} className="size-3.5" />{" "}
+          <FontAwesomeIcon icon={faArrowRotateRight} className="size-3.5" />{" "}
           <span>Refresh</span>
         </button>
       </div>
@@ -314,7 +334,7 @@ function RightSidebar() {
       >
         {activeTab === "details" && (
           <ul className="space-y-2">
-            {details.map((item, index) => (
+            {details?.map((item, index) => (
               <li key={index} className="py-2 border-b border-gray-200">
                 <span className="block text-xs font-semibold text-gray-800">
                   {item.label}
@@ -345,7 +365,7 @@ export default function UI({ selectedAsset, setSelectedAsset }) {
         selectedAsset={selectedAsset}
         setSelectedAsset={setSelectedAsset}
       />
-      <RightSidebar />
+      <RightSidebar selectedAsset={selectedAsset} />
     </>
   );
 }
