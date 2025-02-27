@@ -100,7 +100,7 @@ const Scene = ({ selectedAsset }) => {
 
       {/* Scene Objects */}
       <PlatformModel
-        position={[1, 2.4, 5]}
+        position={[1, 2.4, 6]}
         rotation={[0, 10, 0]}
         castShadow
         receiveShadow

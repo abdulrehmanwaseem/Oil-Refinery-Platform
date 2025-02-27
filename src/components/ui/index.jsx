@@ -8,6 +8,7 @@ import "../../utils/fontawesome";
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isAreaOpen, setIsAreaOpen] = useState(false);
+
   return (
     <header className="absolute z-10 flex flex-wrap items-center justify-between top-3 inset-x-4">
       <div className="flex shadow-md items-center justify-between px-4 py-1.5 rounded-lg w-96 bg-white/95 hover:bg-gray-100">
@@ -39,7 +40,7 @@ function Header() {
 
       <button
         type="button"
-        class="text-white bg-blue-600 shadow-md flex items-center hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
+        class="text-white bg-blue-600 shadow-md flex items-center hover:bg-blue-700 focus:ring-4 focus:ring-blue-500 font-medium rounded-lg text-sm px-4 py-2"
       >
         <FontAwesomeIcon icon={faCopy} className="mr-2 size-4" />
         Overview
@@ -98,8 +99,8 @@ function Header() {
             className="h-6 text-neutral-600 size-4"
           />
         </button>
-        {isAreaOpen && (
-          <div className="absolute left-0 z-50 w-48 py-1 mt-1 bg-white rounded-md shadow-lg top-full">
+        {!isAreaOpen && (
+          <div className="absolute left-0 z-20 w-24 py-1 mt-1 bg-white rounded-md shadow-lg">
             <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-100">
               Area 1
             </a>
