@@ -1,10 +1,9 @@
 import { faCircleQuestion, faCopy } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useRef, useState, useMemo } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import assets from "../../data/assets.json";
 import assetsDetails from "../../data/details.json";
 import "../../utils/fontawesome";
-import { faArrowRotateRight } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -304,7 +303,7 @@ function RightSidebar({ selectedAsset }) {
         </div>
 
         <button className="flex-shrink-0 px-2 py-1 text-sm font-medium text-gray-600 bg-gray-100 rounded hover:bg-gray-200">
-          <FontAwesomeIcon icon={faArrowRotateRight} className="size-3.5" />{" "}
+          <FontAwesomeIcon icon={"arrow-rotate-right"} className="size-3.5" />{" "}
           <span>Refresh</span>
         </button>
       </div>

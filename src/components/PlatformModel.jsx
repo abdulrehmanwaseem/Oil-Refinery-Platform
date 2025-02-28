@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 export function PlatformModel({ selectedAsset, ...props }) {
   const { nodes } = useGLTF("/assets/platform.glb");
-  const texture = useTexture("/assets/texture2.jpg");
+  const texture = useTexture("/assets/texture.jpg");
   texture.center.set(0.5, 0.5);
   texture.rotation = Math.PI;
 
