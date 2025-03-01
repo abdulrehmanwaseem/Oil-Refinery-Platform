@@ -2,7 +2,11 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense, useState } from "react";
 import Loader from "./components/Loader";
 import Scene from "./components/Scene";
-import UI from "./components/ui";
+import { Header } from "./components/ui/Header";
+import { LeftSidebar } from "./components/ui/LeftSidebar";
+import { RightSidebar } from "./components/ui/RightSidebar";
+import assets from "./data/assets.json";
+import assetsDetails from "./data/details.json";
 
 function App() {
   const [cameraPosition] = useState([5, 20, 25]);
@@ -11,14 +15,23 @@ function App() {
   return (
     <div className="relative w-screen h-screen">
       <Loader />
-      <UI selectedAsset={selectedAsset} setSelectedAsset={setSelectedAsset} />
+      <Header />
+      <LeftSidebar
+        selectedAsset={selectedAsset}
+        setSelectedAsset={setSelectedAsset}
+        assets={assets}
+      />
+      <RightSidebar
+        selectedAsset={selectedAsset}
+        assetsDetails={assetsDetails}
+      />
       <Suspense fallback={<Loader />}>
         <Canvas
           camera={{
             position: cameraPosition,
             fov: 50,
             near: 0.2,
-            far: 1000,
+            far: 800,
           }}
           shadows
         >
