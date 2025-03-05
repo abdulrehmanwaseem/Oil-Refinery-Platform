@@ -8,7 +8,7 @@ export function LeftSidebar({ selectedAsset, setSelectedAsset, assets = [] }) {
   const { onMouseDown } = useDragScroll(containerRef);
 
   return (
-    <aside className="absolute z-10 p-4 overflow-hidden bg-white rounded-lg shadow-md left-4 bottom-10 top-20 w-80">
+    <aside className="absolute z-10 p-4 overflow-hidden bg-white rounded-lg shadow-md left-4 bottom-10 top-20 w-[21rem]">
       <SidebarHeader title="Assets" />
       <SearchInput placeholder="Search Id" />
       <AssetListHeader />
@@ -71,15 +71,22 @@ function AssetList({
       className="space-y-2 overflow-hidden cursor-grab no-scrollbar"
       style={{ maxHeight: "calc(100% - 150px)" }}
     >
-      {assets?.map((asset, index) => (
-        <AssetItem
-          key={index}
-          asset={asset}
-          isSelected={selectedAsset === asset.name.replace(/ /g, "_")}
-          onClick={() => setSelectedAsset(asset.name.replace(/ /g, "_"))}
-          getStatusColor={getStatusColor}
-        />
-      ))}
+      {assets?.map((asset, index) => {
+        const internalName =
+          asset.name === "CR-007 Main Platform Crane"
+            ? "Main Deck"
+            : asset.name;
+
+        return (
+          <AssetItem
+            key={index}
+            asset={asset} // Show original name in UI
+            isSelected={selectedAsset === internalName.replace(/ /g, "_")}
+            onClick={() => setSelectedAsset(internalName.replace(/ /g, "_"))} // Send internal name
+            getStatusColor={getStatusColor}
+          />
+        );
+      })}
     </ul>
   );
 }
@@ -97,7 +104,7 @@ function AssetItem({ asset, isSelected, onClick, getStatusColor }) {
           asset.status
         )}`}
       ></span>
-      <span className="flex-1 ml-16 text-md">{asset.name}</span>
+      <span className="flex-1 ml-10 text-md">{asset.name}</span>
       <span className="text-sm font-semibold">{asset.score}</span>
     </li>
   );
