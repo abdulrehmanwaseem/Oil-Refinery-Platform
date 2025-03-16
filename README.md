@@ -55,7 +55,7 @@ This is an interactive 3D visualization demo for an oil refinery platform, desig
 1. Clone the repository
 
 ```bash
-git clone [repository-url]
+git clone https://github.com/abdulrehmanwaseem/Oil-Refinery-Platform
 ```
 
 2. Install dependencies
