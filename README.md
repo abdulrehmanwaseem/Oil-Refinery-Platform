@@ -1,5 +1,7 @@
 # Oil Refinery Platform
 
+![Screenshot 2025-03-16 131327](https://github.com/user-attachments/assets/491bcb19-7e7a-4036-be90-bd15b6bc8d47)
+
 ## Overview
 
 This is an interactive 3D visualization demo for an oil refinery platform, designed to showcase the potential of a larger-scale industrial monitoring system. The demo provides a realistic preview of how a comprehensive oil refinery monitoring and management system could function.
